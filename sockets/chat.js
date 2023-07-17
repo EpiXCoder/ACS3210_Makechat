@@ -11,9 +11,17 @@ module.exports = (io, socket, onlineUsers, channels) => {
       })
     
       socket.on('new message', (data) => {
-        console.log(`🎤 ${data.sender}: ${data.message} 🎤`)
-        io.emit('new message', data);
-      })
+        //Only append the message if the user is currently in that channel
+        let currentChannel = $('.channel-current').text();
+        if(currentChannel == data.channel) {
+          $('.message-container').append(`
+            <div class="message">
+              <p class="message-user">${data.sender}: </p>
+              <p class="message-text">${data.message}</p>
+            </div>
+          `);
+        }
+      });
 
       socket.on('get online users', () => {
         //Send over the onlineUsers
