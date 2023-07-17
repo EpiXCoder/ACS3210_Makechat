@@ -168,7 +168,7 @@
   }
   
   .main-container {
-    display: none;
+    /* display: none; */
     flex-direction: row;
     width: 100%;
   }
